@@ -23,20 +23,20 @@ This is the main repo of the Degusta Box test.
 1 - Add aliases to your _.bash_profile_ or _.zshrc_:
 
 ```shell
-alias degustaboxup="~/Sites/raul/degustabox-docker ; docker-compose up -d php-worker-degustabox"
-alias degustaboxdown="~/Sites/raul/degustabox-docker ; docker-compose stop php-worker-degustabox"
-alias degustaboxbuild="~/Sites/raul/degustabox-docker ; docker-compose build php-worker-degustabox"
+alias degustaboxup="~/Sites/degustabox-docker ; docker-compose up -d php-worker-degustabox"
+alias degustaboxdown="~/Sites/degustabox-docker ; docker-compose stop php-worker-degustabox"
+alias degustaboxbuild="~/Sites/degustabox-docker ; docker-compose build php-worker-degustabox"
 ```
 
 2. Add `127.0.0.1 degustabox.localhost` on `/etc/hosts`.
-3. Clone repository inside `~/Sites/raul/degustabox`:
+3. Clone repository inside `~/Sites/degustabox`:
 4. Copy the file **.env.example** to **.env**.
     ```shell
     > cp .env.example .env
     ```
 5. Start the degustabox containers:
     ```shell
-    > degustaboxeup
+    > degustaboxup
     ```
 6. Go inside the workspace with the following command:
     ```shell
