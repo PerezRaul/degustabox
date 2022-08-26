@@ -15,6 +15,7 @@ return new class extends Migration {
         Schema::create('time_trackers', function (Blueprint $table) {
             $table->char('id', 36)->unique()->primary();
             $table->string('name');
+            $table->date('date');
             $table->time('starts_at_time');
             $table->time('ends_at_time')->nullable();
             $table->timestamp('created_at', 6);

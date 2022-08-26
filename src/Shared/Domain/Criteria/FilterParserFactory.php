@@ -11,7 +11,7 @@ abstract class FilterParserFactory
     /** @SuppressWarnings(PHPMD.BooleanArgumentFlag) */
     public static function get(array $filters, bool $strict = true): array
     {
-        /$mappedFilters = [];
+        $mappedFilters = [];
 
         foreach ($filters as $key => $value) {
             if (!isset(static::mapping()[$key])) {

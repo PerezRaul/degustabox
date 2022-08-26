@@ -29,8 +29,8 @@ final class ConfigureRabbitMqCommand extends Command
 
     private function getExchangeName(): string
     {
-        $connection    = strval(config('shared.bus.event.connection'));
-        $configuration = config('shared.bus.event.connections.' . $connection);
+        $connection    = strval(config('degustabox.bus.event.connection'));
+        $configuration = config('degustabox.bus.event.connections.' . $connection);
 
         if (null === $configuration || !is_array($configuration)) {
             throw new RuntimeException(

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Domain\Filters;
+namespace Src\TimeTrackers\Domain\Filters;
 
 use Src\Shared\Domain\Criteria\FilterOperator;
 use Src\Shared\Domain\Criteria\FilterParser;
@@ -19,7 +19,7 @@ final class SearchFilterParser extends FilterParser
             ],
             [
                 'or'       => true,
-                'field'    => 'created_at',
+                'field'    => 'date',
                 'operator' => FilterOperator::CONTAINS,
                 'value'    => $value,
             ],

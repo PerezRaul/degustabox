@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\TimeTracker\Infrastructure\Persistence\Eloquent;
+namespace Src\TimeTrackers\Infrastructure\Persistence\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 

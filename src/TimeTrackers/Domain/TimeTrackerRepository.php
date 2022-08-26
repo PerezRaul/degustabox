@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Domain;
+namespace Src\TimeTrackers\Domain;
 
 use Src\Shared\Domain\Criteria\Criteria;
 use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
 
 interface TimeTrackerRepository
 {
-    public function save(TimeTrackers $timeTracker): void;
+    public function save(TimeTracker $timeTracker): void;
 
-    public function search(TimeTrackerId $id): ?TimeTrackers;
+    public function search(TimeTrackerId $id): ?TimeTracker;
 
     public function matching(Criteria $criteria): TimeTrackers;
 

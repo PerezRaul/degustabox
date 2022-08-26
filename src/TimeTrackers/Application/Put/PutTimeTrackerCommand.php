@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\Put;
+namespace Src\TimeTrackers\Application\Put;
 
 use Src\Shared\Domain\Bus\Command\Command;
 
@@ -11,6 +11,7 @@ final class PutTimeTrackerCommand implements Command
     public function __construct(
         private string $id,
         private string $name,
+        private string $date,
         private string $startsAtTime,
         private ?string $endsAtTime,
     ) {
@@ -24,6 +25,11 @@ final class PutTimeTrackerCommand implements Command
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function date(): string
+    {
+        return $this->date;
     }
 
     public function startsAtTime(): string

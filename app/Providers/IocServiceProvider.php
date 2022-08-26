@@ -18,7 +18,7 @@ final class IocServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/ioc.php', 'shared.ioc');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/shared/ioc.php', 'degustabox.ioc');
 
         $this->binds();
         $this->singletons();
@@ -28,7 +28,7 @@ final class IocServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/ioc.php' => config_path('shared/ioc.php'),
+            __DIR__ . '/../../config/shared/ioc.php' => config_path('shared/ioc.php'),
         ]);
     }
 
@@ -42,7 +42,7 @@ final class IocServiceProvider extends ServiceProvider
                 });
         }, array_merge([
             HistoricalDomainEventRepository::class => EloquentHistoricalDomainEventRepository::class,
-        ], (array) config('shared.ioc.binds')));
+        ], (array) config('degustabox.ioc.binds')));
     }
 
     private function singletons(): void
@@ -51,7 +51,7 @@ final class IocServiceProvider extends ServiceProvider
             $this->app->singleton($abstract, function (Application $app) use ($concrete) {
                 return $app->make($concrete);
             });
-        }, (array) config('shared.ioc.singletons'));
+        }, (array) config('degustabox.ioc.singletons'));
     }
 
     private function contextualBinding(string $abstract, array $concrete): void

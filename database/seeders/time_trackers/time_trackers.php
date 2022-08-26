@@ -1,24 +1,35 @@
 <?php
 
-use Src\Shared\Domain\Dictionaries\UuidDictionary;
+use Illuminate\Support\Facades\Date;
+use Src\Shared\Domain\ValueObject\Uuid;
 
 return [
     [
-        'id'             => app(UuidDictionary::class)->get(
-            'time_trackers.task1',
-            '0fdb5267-9e88-423d-a8f4-fc33a318abd8'
-        ),
-        'name'           => 'Nombre de la tarea número 1',
+        'id'             => Uuid::random()->value(),
+        'name'           => 'Develop home page',
+        'date'           => Date::now()->__toString(),
         'starts_at_time' => '08:00:00',
-        'ends_at_time'   => '10:00:00',
+        'ends_at_time'   => '09:34:22',
     ],
     [
-        'id'             => app(UuidDictionary::class)->get(
-            'time_trackers.task2',
-            'e5badff4-1dcd-4dc8-8758-15ce1859934d'
-        ),
-        'name'           => 'Nombre de la tarea número 2',
-        'starts_at_time' => '11:00:00',
+        'id'             => Uuid::random()->value(),
+        'name'           => 'Develop table page',
+        'date'           => Date::now()->__toString(),
+        'starts_at_time' => '09:35:22',
         'ends_at_time'   => '11:25:00',
+    ],
+    [
+        'id'             => Uuid::random()->value(),
+        'name'           => 'Develop controllers',
+        'date'           => Date::now()->__toString(),
+        'starts_at_time' => '11:26:00',
+        'ends_at_time'   => '12:08:00',
+    ],
+    [
+        'id'             => Uuid::random()->value(),
+        'name'           => 'Develop scripts',
+        'date'           => Date::now()->__toString(),
+        'starts_at_time' => '13:45:00',
+        'ends_at_time'   => '14:08:00',
     ],
 ];

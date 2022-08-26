@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application;
+namespace Src\TimeTrackers\Application;
 
+use DateTime;
 use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
-use Src\TimeTracker\Domain\TimeTrackerCreatedAt;
-use Src\TimeTracker\Domain\TimeTrackerEndsAtTime;
-use Src\TimeTracker\Domain\TimeTrackerName;
-use Src\TimeTracker\Domain\TimeTrackerStartsAtTime;
-use Src\TimeTracker\Domain\TimeTrackerUpdatedAt;
+use Src\TimeTrackers\Domain\TimeTrackerCreatedAt;
+use Src\TimeTrackers\Domain\TimeTrackerDate;
+use Src\TimeTrackers\Domain\TimeTrackerEndsAtTime;
+use Src\TimeTrackers\Domain\TimeTrackerName;
+use Src\TimeTrackers\Domain\TimeTrackerStartsAtTime;
+use Src\TimeTrackers\Domain\TimeTrackerUpdatedAt;
 use Src\Shared\Domain\Bus\Query\Response;
 
 final class TimeTrackerResponse implements Response
@@ -17,6 +19,7 @@ final class TimeTrackerResponse implements Response
     public function __construct(
         private TimeTrackerId $id,
         private TimeTrackerName $name,
+        private TimeTrackerDate $date,
         private TimeTrackerStartsAtTime $startsAtTime,
         private TimeTrackerEndsAtTime $endsAtTime,
         private TimeTrackerCreatedAt $createdAt,
@@ -32,6 +35,11 @@ final class TimeTrackerResponse implements Response
     public function name(): string
     {
         return $this->name->value();
+    }
+
+    public function date(): string
+    {
+        return $this->date->__toString();
     }
 
     public function startsAtTime(): string

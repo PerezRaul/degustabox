@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\Find;
+namespace Src\TimeTrackers\Application\Find;
 
 use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
-use Src\TimeTracker\Application\TimeTrackerResponse;
-use Src\TimeTracker\Domain\Services\TimeTrackerFinder;
+use Src\TimeTrackers\Application\TimeTrackerResponse;
+use Src\TimeTrackers\Domain\Services\TimeTrackerFinder;
 use Src\Shared\Domain\Bus\Query\QueryHandler;
 
 final class FindTimeTrackerQueryHandler implements QueryHandler
@@ -22,6 +22,7 @@ final class FindTimeTrackerQueryHandler implements QueryHandler
         return new TimeTrackerResponse(
             $timeTracker->id(),
             $timeTracker->name(),
+            $timeTracker->date(),
             $timeTracker->startsAtTime(),
             $timeTracker->endsAtTime(),
             $timeTracker->createdAt(),

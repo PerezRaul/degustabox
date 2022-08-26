@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Domain\Services;
+namespace Src\TimeTrackers\Domain\Services;
 
 use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
-use Src\TimeTracker\Domain\TimeTrackers;
-use Src\TimeTracker\Domain\TimeTrackerRepository;
+use Src\TimeTrackers\Domain\TimeTracker;
+use Src\TimeTrackers\Domain\TimeTrackerRepository;
 use Src\Shared\Domain\Exceptions\NotExists;
 
 final class TimeTrackerFinder
@@ -15,8 +15,8 @@ final class TimeTrackerFinder
     {
     }
 
-    public function __invoke(TimeTrackerId $id): TimeTrackers
+    public function __invoke(TimeTrackerId $id): TimeTracker
     {
-        return $this->repository->search($id) ?? throw new NotExists(TimeTrackers::class, $id);
+        return $this->repository->search($id) ?? throw new NotExists(TimeTracker::class, $id);
     }
 }

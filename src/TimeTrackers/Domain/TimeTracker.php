@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Domain;
+namespace Src\TimeTrackers\Domain;
 
 use Src\Shared\Domain\Aggregate\AggregateRoot;
 use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
-use Src\TimeTracker\Domain\Events\TimeTrackerCreated;
-use Src\TimeTracker\Domain\Events\TimeTrackerUpdated;
+use Src\TimeTrackers\Domain\Events\TimeTrackerCreated;
+use Src\TimeTrackers\Domain\Events\TimeTrackerUpdated;
 
 final class TimeTracker extends AggregateRoot
 {
     public function __construct(
         protected TimeTrackerId $id,
         protected TimeTrackerName $name,
+        protected TimeTrackerDate $date,
         protected TimeTrackerStartsAtTime $startsAtTime,
         protected TimeTrackerEndsAtTime $endsAtTime,
         protected TimeTrackerCreatedAt $createdAt,
@@ -24,6 +25,7 @@ final class TimeTracker extends AggregateRoot
     public static function create(
         TimeTrackerId $id,
         TimeTrackerName $name,
+        TimeTrackerDate $date,
         TimeTrackerStartsAtTime $startsAtTime,
         TimeTrackerEndsAtTime $endsAtTime,
         TimeTrackerCreatedAt $createdAt,
@@ -32,6 +34,7 @@ final class TimeTracker extends AggregateRoot
         $timeTracker = new self(
             $id,
             $name,
+            $date,
             $startsAtTime,
             $endsAtTime,
             $createdAt,
@@ -43,6 +46,7 @@ final class TimeTracker extends AggregateRoot
         $timeTracker->record(new TimeTrackerCreated(
             $id->value(),
             $name->value(),
+            $date->__toString(),
             $startsAtTime->__toString(),
             null !== $endsAtTime->value() ? $endsAtTime->__toString() : null,
             $createdAt->__toString(),
@@ -57,6 +61,7 @@ final class TimeTracker extends AggregateRoot
         return new self(
             new TimeTrackerId($primitives['id']),
             new TimeTrackerName($primitives['name']),
+            new TimeTrackerDate($primitives['date']),
             new TimeTrackerStartsAtTime($primitives['starts_at_time']),
             new TimeTrackerEndsAtTime($primitives['ends_at_time']),
             new TimeTrackerCreatedAt($primitives['created_at']),
@@ -65,13 +70,14 @@ final class TimeTracker extends AggregateRoot
     }
 
     public function update(
-        TimeTrackerId|TimeTrackerName|TimeTrackerStartsAtTime|TimeTrackerEndsAtTime|TimeTrackerUpdatedAt ...$data
+        TimeTrackerId|TimeTrackerName|TimeTrackerDate|TimeTrackerStartsAtTime|TimeTrackerEndsAtTime|TimeTrackerUpdatedAt ...$data
     ): void {
         $this->applyChanges(...$data);
 
         $this->recordOnChanges(new TimeTrackerUpdated(
             $this->id->value(),
             $this->name->value(),
+            $this->date->__toString(),
             $this->startsAtTime->__toString(),
             null !== $this->endsAtTime->value() ? $this->endsAtTime->__toString() : null,
             $this->createdAt->__toString(),
@@ -85,6 +91,7 @@ final class TimeTracker extends AggregateRoot
         return [
             'id'             => $this->id->value(),
             'name'           => $this->name->value(),
+            'date'           => $this->date->__toString(),
             'starts_at_time' => $this->startsAtTime->__toString(),
             'ends_at_time'   => null !== $this->endsAtTime->value() ? $this->endsAtTime->__toString() : null,
             'created_at'     => $this->createdAt->__toString(),
@@ -100,6 +107,11 @@ final class TimeTracker extends AggregateRoot
     public function name(): TimeTrackerName
     {
         return $this->name;
+    }
+
+    public function date(): TimeTrackerDate
+    {
+        return $this->date;
     }
 
     public function startsAtTime(): TimeTrackerStartsAtTime

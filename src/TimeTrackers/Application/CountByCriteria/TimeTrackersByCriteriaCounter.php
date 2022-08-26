@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\CountByCriteria;
+namespace Src\TimeTrackers\Application\CountByCriteria;
 
-use Src\TimeTracker\Domain\TimeTrackerRepository;
+use Src\TimeTrackers\Domain\TimeTrackerRepository;
 use Src\Shared\Domain\Criteria\Criteria;
 use Src\Shared\Domain\Criteria\Filters;
 use Src\Shared\Domain\Criteria\Groups;

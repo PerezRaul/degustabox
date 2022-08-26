@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Src\Shared\Domain\Bus\Command\CommandBus;
-use Src\TimeTracker\Application\Put\PutTimeTrackerCommand;
+use Src\TimeTrackers\Application\Put\PutTimeTrackerCommand;
 
 class TimeTrackerSeeder extends Seeder
 {
@@ -16,6 +16,7 @@ class TimeTrackerSeeder extends Seeder
             app(CommandBus::class)->dispatch(new PutTimeTrackerCommand(
                 $timeTracker['id'],
                 $timeTracker['name'],
+                $timeTracker['date'],
                 $timeTracker['starts_at_time'],
                 $timeTracker['ends_at_time'],
             ));

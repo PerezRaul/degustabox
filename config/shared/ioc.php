@@ -1,7 +1,7 @@
 <?php
 
-use Src\TimeTracker\Domain\TimeTrackerRepository;
-use Src\TimeTracker\Infrastructure\Persistence\EloquentTimeTrackerRepository;
+use Src\TimeTrackers\Domain\TimeTrackerRepository;
+use Src\TimeTrackers\Infrastructure\Persistence\EloquentTimeTrackerRepository;
 
 return [
     'binds'      => [

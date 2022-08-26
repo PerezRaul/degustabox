@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Domain\Events;
+namespace Src\TimeTrackers\Domain\Events;
 
 use Src\Shared\Domain\Audits\Events\Auditable;
 use Src\Shared\Domain\Bus\Event\DomainEvent;
@@ -12,6 +12,7 @@ final class TimeTrackerCreated extends DomainEvent implements Auditable
     public function __construct(
         string $id,
         private string $name,
+        private string $date,
         private string $startsAtTime,
         private ?string $endsAtTime,
         private string $createdAt,
@@ -36,6 +37,7 @@ final class TimeTrackerCreated extends DomainEvent implements Auditable
         return new self(
             $aggregateId,
             $body['name'],
+            $body['date'],
             $body['starts_at_time'],
             $body['ends_at_time'],
             $eventId,
@@ -47,6 +49,7 @@ final class TimeTrackerCreated extends DomainEvent implements Auditable
     {
         return [
             'name'           => $this->name,
+            'date'           => $this->date,
             'starts_at_time' => $this->startsAtTime,
             'ends_at_time'   => $this->endsAtTime,
             'created_at'     => $this->createdAt,
@@ -57,6 +60,11 @@ final class TimeTrackerCreated extends DomainEvent implements Auditable
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function date(): string
+    {
+        return $this->date;
     }
 
     public function startsAtTime(): string

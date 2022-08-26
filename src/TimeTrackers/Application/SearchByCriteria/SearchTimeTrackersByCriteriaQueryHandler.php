@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\SearchByCriteria;
+namespace Src\TimeTrackers\Application\SearchByCriteria;
 
-use Src\TimeTracker\Application\TimeTrackerResponse;
-use Src\TimeTracker\Application\TimeTrackersResponse;
-use Src\TimeTracker\Domain\TimeTrackers;
-use Src\TimeTracker\Domain\Services\TimeTrackersByCriteriaSearcher;
+use Src\TimeTrackers\Application\TimeTrackerResponse;
+use Src\TimeTrackers\Application\TimeTrackersResponse;
+use Src\TimeTrackers\Domain\TimeTracker;
+use Src\TimeTrackers\Domain\Services\TimeTrackersByCriteriaSearcher;
 use Src\Shared\Domain\Bus\Query\QueryHandler;
 use Src\Shared\Domain\Criteria\Filters;
 use Src\Shared\Domain\Criteria\Orders;
@@ -32,9 +32,10 @@ final class SearchTimeTrackersByCriteriaQueryHandler implements QueryHandler
 
     private function toResponse(): callable
     {
-        return fn(TimeTrackers $timeTracker) => new TimeTrackerResponse(
+        return fn(TimeTracker $timeTracker) => new TimeTrackerResponse(
             $timeTracker->id(),
             $timeTracker->name(),
+            $timeTracker->date(),
             $timeTracker->startsAtTime(),
             $timeTracker->endsAtTime(),
             $timeTracker->createdAt(),

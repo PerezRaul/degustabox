@@ -2,35 +2,35 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Infrastructure\Persistence;
+namespace Src\TimeTrackers\Infrastructure\Persistence;
 
-use Src\TimeTracker\Domain\TimeTrackers;
-use Src\TimeTracker\Domain\TimeTrackerRepository;
-use Src\TimeTracker\Domain\Customers;
-use Src\TimeTracker\Infrastructure\Persistence\Eloquent\Customer as EloquentCustomer;
-use Src\Shared\Domain\Customers\CustomerId;
 use Src\Shared\Domain\Criteria\Criteria;
+use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
 use Src\Shared\Infrastructure\Persistence\Eloquent\EloquentCriteriaConverter;
 use Src\Shared\Infrastructure\Persistence\Eloquent\EloquentRepository;
+use Src\TimeTrackers\Domain\TimeTracker;
+use Src\TimeTrackers\Domain\TimeTrackerRepository;
+use Src\TimeTrackers\Domain\TimeTrackers;
+use Src\TimeTrackers\Infrastructure\Persistence\Eloquent\TimeTracker as EloquentTimeTracker;
 
 use function Lambdish\Phunctional\map;
 
 final class EloquentTimeTrackerRepository extends EloquentRepository implements TimeTrackerRepository
 {
-    public function save(TimeTrackers $customer): void
+    public function save(TimeTracker $timeTracker): void
     {
-        if (!$customer->hasChanges()) {
+        if (!$timeTracker->hasChanges()) {
             return;
         }
 
-        EloquentCustomer::updateOrCreate([
-            'id' => $customer->id()->value(),
-        ], $customer->toPrimitives());
+        EloquentTimeTracker::updateOrCreate([
+            'id' => $timeTracker->id()->value(),
+        ], $timeTracker->toPrimitives());
     }
 
-    public function search(CustomerId $id): ?TimeTrackers
+    public function search(TimeTrackerId $id): ?TimeTracker
     {
-        $model = EloquentCustomer::find($id->value());
+        $model = EloquentTimeTracker::find($id->value());
 
         if (null === $model) {
             return null;
@@ -39,28 +39,28 @@ final class EloquentTimeTrackerRepository extends EloquentRepository implements 
         return $this->transformModelToDomainEntity($model);
     }
 
-    public function matching(Criteria $criteria): Customers
+    public function matching(Criteria $criteria): TimeTrackers
     {
-        $query = EloquentCustomer::query();
+        $query = EloquentTimeTracker::query();
 
         EloquentCriteriaConverter::apply($query, $criteria);
 
-        return new Customers(map(function (EloquentCustomer $model) {
+        return new TimeTrackers(map(function (EloquentTimeTracker $model) {
             return $this->transformModelToDomainEntity($model);
         }, $query->get()->all()));
     }
 
     public function matchingCount(Criteria $criteria): int
     {
-        $query = EloquentCustomer::query();
+        $query = EloquentTimeTracker::query();
 
         EloquentCriteriaConverter::apply($query, $criteria);
 
         return $query->count('id');
     }
 
-    private function transformModelToDomainEntity(EloquentCustomer $model): TimeTrackers
+    private function transformModelToDomainEntity(EloquentTimeTracker $model): TimeTracker
     {
-        return TimeTrackers::fromPrimitives((array) $model->getOriginal());
+        return TimeTracker::fromPrimitives((array) $model->getOriginal());
     }
 }

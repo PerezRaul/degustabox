@@ -2,31 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\Put;
+namespace Src\TimeTrackers\Application\Put;
 
-use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
-use Src\TimeTracker\Domain\TimeTrackerCreatedAt;
-use Src\TimeTracker\Domain\TimeTrackers;
-use Src\TimeTracker\Domain\TimeTrackerEndsAtTime;
-use Src\TimeTracker\Domain\TimeTrackerName;
-use Src\TimeTracker\Domain\TimeTrackerRepository;
-use Src\TimeTracker\Domain\TimeTrackerStartsAtTime;
-use Src\TimeTracker\Domain\TimeTrackerUpdatedAt;
-use Src\Shared\Domain\Bus\Event\EventBus;
 use Src\Shared\Domain\Bus\Query\QueryBus;
+use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
+use Src\TimeTrackers\Domain\TimeTracker;
+use Src\TimeTrackers\Domain\TimeTrackerCreatedAt;
+use Src\TimeTrackers\Domain\TimeTrackerDate;
+use Src\TimeTrackers\Domain\TimeTrackerEndsAtTime;
+use Src\TimeTrackers\Domain\TimeTrackerName;
+use Src\TimeTrackers\Domain\TimeTrackerRepository;
+use Src\TimeTrackers\Domain\TimeTrackerStartsAtTime;
+use Src\TimeTrackers\Domain\TimeTrackerUpdatedAt;
+use Src\Shared\Domain\Bus\Event\EventBus;
 
 final class TimeTrackerPut
 {
     public function __construct(
         private TimeTrackerRepository $repository,
-        private EventBus $eventBus,
-        private QueryBus $queryBus,
+        private EventBus $eventBus
     ) {
     }
 
     public function __invoke(
         TimeTrackerId $id,
         TimeTrackerName $name,
+        TimeTrackerDate $date,
         TimeTrackerStartsAtTime $startsAtTime,
         TimeTrackerEndsAtTime $endsAtTime,
     ): void {
@@ -36,12 +37,14 @@ final class TimeTrackerPut
             $this->create(
                 $id,
                 $name,
+                $date,
                 $startsAtTime,
                 $endsAtTime,
             ) :
             $this->update(
                 $timeTracker,
                 $name,
+                $date,
                 $startsAtTime,
                 $endsAtTime,
             );
@@ -53,12 +56,14 @@ final class TimeTrackerPut
     private function create(
         TimeTrackerId $id,
         TimeTrackerName $name,
+        TimeTrackerDate $date,
         TimeTrackerStartsAtTime $startsAtTime,
         TimeTrackerEndsAtTime $endsAtTime,
-    ): TimeTrackers {
-        return TimeTrackers::create(
+    ): TimeTracker {
+        return TimeTracker::create(
             $id,
             $name,
+            $date,
             $startsAtTime,
             $endsAtTime,
             TimeTrackerCreatedAt::now(),
@@ -67,13 +72,15 @@ final class TimeTrackerPut
     }
 
     private function update(
-        TimeTrackers $timeTracker,
+        TimeTracker $timeTracker,
         TimeTrackerName $name,
+        TimeTrackerDate $date,
         TimeTrackerStartsAtTime $startsAtTime,
         TimeTrackerEndsAtTime $endsAtTime,
-    ): TimeTrackers {
+    ): TimeTracker {
         $timeTracker->update(
             $name,
+            $date,
             $startsAtTime,
             $endsAtTime,
             TimeTrackerUpdatedAt::now(),

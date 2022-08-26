@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\Find;
+namespace Src\TimeTrackers\Application\Find;
 
 use Src\Shared\Domain\Bus\Query\Query;
 

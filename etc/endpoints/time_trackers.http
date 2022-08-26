@@ -1,0 +1,24 @@
+# Partner driving schools get
+GET http://degustabox.localhost
+Accept: application/json
+Content-Type: application/json
+
+{
+    "date": "2022-08-26",
+    "per_page": 20,
+    "page": 1
+}
+
+###
+
+# Partner driving school put
+PUT http://degustabox.localhost/time-tracker/85231cb5-77fb-431a-864d-362e52a25df7
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Test Project",
+    "date": "2022-08-30",
+    "starts_at_time": "08:00:20",
+    "ends_at_time": "09:22:00"
+}

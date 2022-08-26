@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application;
+namespace Src\TimeTrackers\Application;
 
 use Src\Shared\Domain\Bus\Query\Response;
 

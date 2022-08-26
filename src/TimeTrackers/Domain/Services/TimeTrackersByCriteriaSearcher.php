@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Domain\Services;
+namespace Src\TimeTrackers\Domain\Services;
 
-use Src\TimeTracker\Domain\TimeTrackerRepository;
+use Src\TimeTrackers\Domain\TimeTrackerRepository;
 use Src\Shared\Domain\Criteria\Criteria;
 use Src\Shared\Domain\Criteria\Filters;
 use Src\Shared\Domain\Criteria\Groups;
 use Src\Shared\Domain\Criteria\Orders;
-use Src\TimeTracker\Domain\TimeTrackers;
+use Src\TimeTrackers\Domain\TimeTrackers;
 
 final class TimeTrackersByCriteriaSearcher
 {

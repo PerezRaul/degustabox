@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\Put;
+namespace Src\TimeTrackers\Application\Put;
 
 use Src\Shared\Domain\TimeTrackers\TimeTrackerId;
-use Src\TimeTracker\Domain\TimeTrackerEndsAtTime;
-use Src\TimeTracker\Domain\TimeTrackerName;
-
-;
-
+use Src\TimeTrackers\Domain\TimeTrackerDate;
+use Src\TimeTrackers\Domain\TimeTrackerEndsAtTime;
+use Src\TimeTrackers\Domain\TimeTrackerName;
 use Src\Shared\Domain\Bus\Command\CommandHandler;
-use Src\TimeTracker\Domain\TimeTrackerStartsAtTime;
+use Src\TimeTrackers\Domain\TimeTrackerStartsAtTime;
 
 final class PutTimeTrackerCommandHandler implements CommandHandler
 {
@@ -23,12 +21,14 @@ final class PutTimeTrackerCommandHandler implements CommandHandler
     {
         $id           = new TimeTrackerId($command->id());
         $name         = new TimeTrackerName($command->name());
+        $date         = new TimeTrackerDate($command->date());
         $startsAtTime = new TimeTrackerStartsAtTime($command->startsAtTime());
         $endsAtTime   = new TimeTrackerEndsAtTime($command->endsAtTime());
 
         $this->putter->__invoke(
             $id,
             $name,
+            $date,
             $startsAtTime,
             $endsAtTime,
         );

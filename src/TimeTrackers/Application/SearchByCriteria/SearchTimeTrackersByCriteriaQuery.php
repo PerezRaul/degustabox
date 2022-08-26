@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Src\TimeTracker\Application\SearchByCriteria;
+namespace Src\TimeTrackers\Application\SearchByCriteria;
 
 use Src\Shared\Domain\Bus\Query\Query;
 

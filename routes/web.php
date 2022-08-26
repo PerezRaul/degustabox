@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TimeTrackers\TimeTrackerPutController;
+use App\Http\Controllers\TimeTrackers\TimeTrackersGetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', TimeTrackersGetController::class);
+
+Route::name('time_tracker')->prefix('time-tracker')->group(function () {
+    Route::name('.new_time_tracker')->prefix('{timeTrackerId}')->group(function () {
+        Route::put('/', TimeTrackerPutController::class);
+    });
 });

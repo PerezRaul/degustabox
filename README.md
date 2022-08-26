@@ -47,6 +47,7 @@ alias degustaboxbuild="~/Sites/degustabox-docker ; docker-compose build php-work
     > composer install
     > php artisan degustabox:domain-events:rabbitmq:configure #Creates exchanges and queue for each subscriber
     > php artisan migrate:fresh --seed
+    > npm install
     ```
 
 ## RabbitMQ Events
@@ -54,7 +55,7 @@ alias degustaboxbuild="~/Sites/degustabox-docker ; docker-compose build php-work
 ### Generate supervisord config files
 
 ```shell
-> php artisan hoyvoy:domain-events:rabbitmq:generate-supervisor-files
+> php artisan degustabox:domain-events:rabbitmq:generate-supervisor-files
 ```
 
 ## Code analysis

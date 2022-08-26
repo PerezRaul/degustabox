@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Hoyvoy\Backoffice\Audits\Application\Create;
+namespace Src\Audits\Application\Create;
 
 use Src\Shared\Domain\Bus\Command\Command;
 
