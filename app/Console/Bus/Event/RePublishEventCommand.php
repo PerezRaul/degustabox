@@ -10,7 +10,7 @@ use Src\Shared\Domain\Bus\Command\CommandBus;
 
 final class RePublishEventCommand extends Command
 {
-    protected $signature   = 'degustabox:domain-events:republish
+    protected $signature   = 'time-tracker:domain-events:republish
                               {id : The id of the historical domain events}';
     protected $description = 'Republish event from historical domain events';
 

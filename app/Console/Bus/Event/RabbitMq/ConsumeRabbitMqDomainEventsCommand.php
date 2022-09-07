@@ -12,7 +12,7 @@ use function Lambdish\Phunctional\repeat;
 
 final class ConsumeRabbitMqDomainEventsCommand extends Command
 {
-    protected $signature   = 'degustabox:domain-events:rabbitmq:consume
+    protected $signature   = 'time-tracker:domain-events:rabbitmq:consume
         {queue : Queue name}
         {quantity : Quantity of events to process}
     ';

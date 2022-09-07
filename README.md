@@ -1,6 +1,6 @@
-# Degusta Box Project
+# Time Tracker Project
 
-This is the main repo of the Degusta Box test.
+This is the main repo of the time tracker.
 
 ## Table of contents
 
@@ -16,36 +16,36 @@ This is the main repo of the Degusta Box test.
 
 ### Requirements
 
-- [Docker repository](https://github.com/PerezRaul/degustabox-docker)
+- [Docker repository](https://github.com/PerezRaul/docker)
 
 ### Installation
 
 1 - Add aliases to your _.bash_profile_ or _.zshrc_:
 
 ```shell
-alias degustaboxup="~/Sites/degustabox-docker ; docker-compose up -d php-worker-degustabox"
-alias degustaboxdown="~/Sites/degustabox-docker ; docker-compose stop php-worker-degustabox"
-alias degustaboxbuild="~/Sites/degustabox-docker ; docker-compose build php-worker-degustabox"
+alias timetrackerup="~/Sites/docker ; docker-compose up -d php-worker-time-tracker"
+alias timetrackerdown="~/Sites/docker ; docker-compose stop php-worker-time-tracker"
+alias timetrackerbuild="~/Sites/docker ; docker-compose build php-worker-time-tracker"
 ```
 
-2. Add `127.0.0.1 degustabox.localhost` on `/etc/hosts`.
-3. Clone repository inside `~/Sites/degustabox`:
+2. Add `127.0.0.1 time-tracker.localhost` on `/etc/hosts`.
+3. Clone repository inside `~/Sites`:
 4. Copy the file **.env.example** to **.env**.
     ```shell
     > cp .env.example .env
     ```
-5. Start the degustabox containers:
+5. Start the time tracker containers:
     ```shell
-    > degustaboxup
+    > timetrackerup
     ```
 6. Go inside the workspace with the following command:
     ```shell
     > dockerbash
     ```
-7. Execute the following commands on backend backoffice folder _/var/www/degustabox_:
+7. Execute the following commands on backend backoffice folder _/var/www/time-tracker_:
     ```shell
     > composer install
-    > php artisan degustabox:domain-events:rabbitmq:configure #Creates exchanges and queue for each subscriber
+    > php artisan time-tracker:domain-events:rabbitmq:configure #Creates exchanges and queue for each subscriber
     > php artisan migrate:fresh --seed
     > npm install
     ```
@@ -55,7 +55,7 @@ alias degustaboxbuild="~/Sites/degustabox-docker ; docker-compose build php-work
 ### Generate supervisord config files
 
 ```shell
-> php artisan degustabox:domain-events:rabbitmq:generate-supervisor-files
+> php artisan time-tracker:domain-events:rabbitmq:generate-supervisor-files
 ```
 
 ## Code analysis

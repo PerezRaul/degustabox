@@ -42,11 +42,11 @@ final class BusServiceProvider extends ServiceProvider
         /** @var Repository $config */
         $config = config();
 
-        $this->mergeConfigFrom(__DIR__ . '/../../config/bus.php', 'degustabox.bus');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/bus.php', 'time-tracker.bus');
 
         if (app()->environment() === 'testing') {
-            $config->set('degustabox.bus.scan_dirs', array_merge(
-                (array) $config->get('degustabox.bus.scan_dirs'),
+            $config->set('time-tracker.bus.scan_dirs', array_merge(
+                (array) $config->get('time-tracker.bus.scan_dirs'),
                 [base_path('tests/**/*')],
             ));
         }
@@ -56,11 +56,11 @@ final class BusServiceProvider extends ServiceProvider
             if (app()->environment() === 'testing') {
                 $scanDirs[] = base_path('../../../../tests/**/*');
             }
-            $config->set('degustabox.bus.scan_dirs', $scanDirs);
+            $config->set('time-tracker.bus.scan_dirs', $scanDirs);
         }
 
         /** @var string[] $scanDirs */
-        $scanDirs = $config->get('degustabox.bus.scan_dirs');
+        $scanDirs = $config->get('time-tracker.bus.scan_dirs');
 
         $this->registerCommands();
 
@@ -131,8 +131,8 @@ final class BusServiceProvider extends ServiceProvider
             return new DomainEventSubscriberLocator($app->tagged('domain_event_subscriber'));
         });
 
-        $connection    = strval(config('degustabox.bus.event.connection'));
-        $configuration = config('degustabox.bus.event.connections.' . $connection);
+        $connection    = strval(config('time-tracker.bus.event.connection'));
+        $configuration = config('time-tracker.bus.event.connections.' . $connection);
 
         if (null === $configuration || !is_array($configuration)) {
             throw new RuntimeException(

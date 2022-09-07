@@ -12,7 +12,7 @@ use function Lambdish\Phunctional\each;
 
 final class EventsListCommand extends Command
 {
-    protected $signature   = 'degustabox:domain-events:list
+    protected $signature   = 'time-tracker:domain-events:list
                               {--search=* : Will return events / subscribers that match with the string}';
     protected $description = 'List all events';
 

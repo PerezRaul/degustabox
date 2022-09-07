@@ -14,7 +14,7 @@ class MigrateFreshCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'degustabox:migrate:fresh
+    protected $signature = 'time-tracker:migrate:fresh
                             {--database= : The database connection to use}
                             {--drop-views : Drop all tables and views}
                             {--drop-types : Drop all tables and types (Postgres only)}

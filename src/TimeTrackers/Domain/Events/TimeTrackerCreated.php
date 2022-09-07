@@ -25,7 +25,7 @@ final class TimeTrackerCreated extends DomainEvent implements Auditable
 
     public static function eventName(): string
     {
-        return 'degustabox.1.event.time_tracker.created';
+        return 'time-tracker.1.event.time_tracker.created';
     }
 
     public static function fromPrimitives(

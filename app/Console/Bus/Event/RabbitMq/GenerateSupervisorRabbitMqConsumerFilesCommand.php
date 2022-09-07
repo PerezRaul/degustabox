@@ -13,7 +13,7 @@ use function Lambdish\Phunctional\each;
 
 final class GenerateSupervisorRabbitMqConsumerFilesCommand extends Command
 {
-    protected $signature   = 'degustabox:domain-events:rabbitmq:generate-supervisor-files
+    protected $signature   = 'time-tracker:domain-events:rabbitmq:generate-supervisor-files
         {events=100 : Events to process at time}
         {processes=1 : Nuber of processes per subscriber}
     ';

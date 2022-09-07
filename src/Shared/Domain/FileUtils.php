@@ -17,7 +17,7 @@ final class FileUtils
     {
         if (empty($dirs)) {
             /** @var string[] $dirs */
-            $dirs = config('degustabox.bus.scan_dirs');
+            $dirs = config('time-tracker.bus.scan_dirs');
         }
 
         return array_values(map(

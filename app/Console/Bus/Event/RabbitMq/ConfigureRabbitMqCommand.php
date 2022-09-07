@@ -12,7 +12,7 @@ use Src\Shared\Infrastructure\Bus\Event\RabbitMq\RabbitMqConfigurer;
 
 final class ConfigureRabbitMqCommand extends Command
 {
-    protected $signature   = 'degustabox:domain-events:rabbitmq:configure';
+    protected $signature   = 'time-tracker:domain-events:rabbitmq:configure';
     protected $description = 'Configure the RabbitMQ to allow publish & consume domain events';
 
     public function handle(): void
@@ -29,8 +29,8 @@ final class ConfigureRabbitMqCommand extends Command
 
     private function getExchangeName(): string
     {
-        $connection    = strval(config('degustabox.bus.event.connection'));
-        $configuration = config('degustabox.bus.event.connections.' . $connection);
+        $connection    = strval(config('time-tracker.bus.event.connection'));
+        $configuration = config('time-tracker.bus.event.connections.' . $connection);
 
         if (null === $configuration || !is_array($configuration)) {
             throw new RuntimeException(
